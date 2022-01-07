@@ -59,7 +59,7 @@ class Game:
     
     def runGame(self):
         self.printMap()
-        input("This part to be implemented > ") # TODO: implement user command to move Player 
+        input("This part to be implemented > ") # TODO: implement user command to move Player !!!!!!!!!!!!!!!!!!!!!!!!!
 
 
 
