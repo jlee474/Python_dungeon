@@ -1,5 +1,10 @@
+
 import random
 from item import Item
+# keyHelper -> to help capture keyboard input, more specifically arrow key
+import keyHelper
+# console.py file for system commands
+import console
 
 class Game:
     def __init__(self) -> None:
@@ -23,12 +28,15 @@ class Game:
         for item in itemsArray:
             randomLocation = random.choice(availableLocations)
             newItem = Item(item, randomLocation)
-            randomLocation = [randomLocation] # to convert into an array for operative
-            availableLocations = list (set(availableLocations) - set(randomLocation)) # the conversion to set is to do arithmetic function, and list to convert back
+            # to convert into an array for operative function
+            randomLocation = [randomLocation] 
+            # the conversion to "set" is to do arithmetic function, and list to convert back
+            availableLocations = list (set(availableLocations) - set(randomLocation)) 
             newItemsArray.append(newItem)
         return newItemsArray
 
-    def checkItems(self): # prints the array of items and their location
+    # prints the array of items and their location
+    def checkItems(self): 
         for item in self.items:
             print(item)
 
@@ -45,21 +53,47 @@ class Game:
         column_header = ' |  ' + '  |  '.join(self.mapColumns) + '  |'
         print(column_header)
         for row in range(1, self.mapRows + 1, 1):
-            rowContent = f'{row}|' # creating the row header
+            # creating the row header
+            rowContent = f'{row}|' 
             for column in self.mapColumns:
                 content = self.get_content_at_location(f'{column}{row}')
-                if content is None: # if the return object was null/undefined (Javascript term), it is None
+                # if the return object was null/undefined (Javascript term), it is None
+                if content is None: 
                     content = "  ░  "
                 elif content.type == "Player": 
                     content = "  Ö  "
                 else: 
                     content = "  ░  "
-                rowContent = rowContent + content + " " # the extra space is because of the | separator also takes up a space
+                # the extra space is because of the | separator also takes up a space
+                rowContent = rowContent + content + " " 
             print(rowContent) 
     
     def runGame(self):
-        self.printMap()
-        input("This part to be implemented > ") # TODO: implement user command to move Player !!!!!!!!!!!!!!!!!!!!!!!!!
+        available_commands = ["Up", "Right", "Down", "Left"]
+
+        while (self.running):
+            console.clear()
+            self.printMap()
+            # to capture user input
+            print('Make your move (Use Arrow Keys. Escape key to exit game) ')
+            userInput = keyHelper.keyboard_input()
+            if userInput == "Escape":
+                console.exit()
+            elif userInput in available_commands:
+                print (userInput)
+                self.move(userInput)
+    
+    # move() is to move a player space
+    def move(self, userInput):
+        print(f' **in Game function move()**  The userInput value is {userInput}')
+
+        # TODO: define the function to move the Player item one adjacent space
+        pass
+        
+
+
+
+
 
 
 
