@@ -1,6 +1,6 @@
 try:
     # Python2
-    import Tkinter as tk #Tkinter or tkiner is for keyboard input
+    import Tkinter as tk #Tkinter or tkinter is for keyboard input
 except ImportError:
     # Python3
     import tkinter as tk
@@ -23,15 +23,23 @@ def keyboard_input():
     keyPress.mainloop()
     return userInput
 
+def destroy():
+    # terminates the mainloop completely
+    keyPress.destroy()
+    activate()
+    keyPress.mainloop()
 
 # the main object or function to utilize this keyboard
-keyPress = tk.Tk()  
-# useful method to specify what each key stroke does
-keyPress.bind_all('<Key>', action)
-# withdraw() => don't show the tk window
-keyPress.withdraw()  
+def activate():
+    global keyPress
+    keyPress = tk.Tk()
+    # useful method to specify what each key stroke does
+    keyPress.bind_all('<Key>', action)
+    # withdraw() => don't show the tk window
+    keyPress.withdraw()  
 
 
+activate()
 
 
 
